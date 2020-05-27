@@ -1,5 +1,6 @@
 'use strict';
 
+
 const names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
 const leftImage = document.getElementById('left');
@@ -19,6 +20,7 @@ const votes = [];
 function Product(name) {
   this.name = name;
   this.path = `img/ ${name} .jpg`;
+
   this.votes = 0;
   this.views = 0;
   allProducts.push(this);
@@ -35,6 +37,7 @@ function displayPics(){
       viewed.push(rando);
     }
   }
+
   // TODO: In a sentence or two, explain why the previous line of code threw an error when we changed the variable declaration from `var to `let`.
   // PUT YOUR RESPONSE IN THIS COMMENT
   // 'Let' variables are scoped to the specific code block in which they are declared. As a result, 'rando' would need to be logged within the while loop rather than outside of it. If you move the line of code one line up inside of the curly brace, the error is fixed.
@@ -42,6 +45,7 @@ function displayPics(){
 
   for (let i = 0; i < 3; i++){
     const temp = viewed.shift();
+
     pics[i].src = allProducts[temp].path;
     pics[i].id = allProducts[temp].name;
     allProducts[temp].views += 1;
@@ -59,6 +63,7 @@ function handleClick(event) {
     showList();
     makeChart();
   }
+
   for(let i = 0; i < names.length; i++){
     if(event.target.id === allProducts[i].name) {
       allProducts[i].votes += 1;
@@ -89,6 +94,7 @@ function makeChartData(){
 function makeChart(){
   makeChartData();
   const ctx = document.getElementById('chartypants').getContext('2d');
+
   new Chart(ctx, { //eslint-disable-line
     type: 'bar',
     data: {
@@ -128,7 +134,9 @@ if(localStorage.busmall){
   allProducts = JSON.parse(localStorage.busmall);
 } else {
   console.log('There is no local storage data; initialize app by creating instances');
+
   for(let i = 0; i < names.length; i++) {
+
     new Product(names[i]);
   }
 }
